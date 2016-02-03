@@ -5,8 +5,14 @@
     <title>Тренировка алгебры</title>
 </head>
 <body>
-<div id="zadacha"></div>
+<div id="zadacha" style="font-size: 36px"></div>
+<button onclick="innerInDiv()">Следующий пример</button>
 <script>
+    var randAlg; // случайное арифметическое действие, плюс или минус
+    var firstNumber; // случайное первое число
+    var secondNumber; // случайное второе число
+    var otvet; // ответ на решение задачи
+
     // Возвращает случайное число между min (включительно) и max (не включая max)
     function getRandomNumber(how) {
         var min = 1;
@@ -23,7 +29,15 @@
     }
 
     function innerInDiv (content){
-        document.getElementById('zadacha').innerHTML = content;
+        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet;
+
+        randAlg = getRandomAlg();
+        firstNumber = getRandomNumber(2);
+        secondNumber = getRandomNumber(2);
+        otvet = eval(firstNumber + randAlg + secondNumber);
+        content = firstNumber + " " + randAlg + " " + secondNumber;
+
+        setTimeout(function() { document.getElementById('zadacha').innerHTML = content; }, 1000);
     }
 
     function getRandomAlg(){
@@ -34,10 +48,11 @@
         var b = dict[c]; //в переменную с записывается случайный из них
         return b;
     }
-    var randAlg = getRandomAlg();
-    var firstNumber = getRandomNumber(2);
-    var secondNumber = getRandomNumber(2);
-    innerInDiv (firstNumber + " " + randAlg + " " + secondNumber + " = " + eval(firstNumber + randAlg + secondNumber)); // запишем пример при первом запуске страницы
+
+   // randAlg = getRandomAlg();
+   //firstNumber = getRandomNumber(2);
+    //secondNumber = getRandomNumber(2);
+    //innerInDiv (); // запишем пример при первом запуске страницы
 </script>
 </body>
 </html>
