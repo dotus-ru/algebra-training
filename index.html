@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Тренировка алгебры</title>
+</head>
+<body>
+<div id="zadacha"></div>
+<script>
+    // Возвращает случайное число между min (включительно) и max (не включая max)
+    function getRandomNumber(how) {
+        var min = 1;
+        var max = 10;
+        var count = 1;
+        var exit = "";
+        while(count <= how){
+            var c = Math.floor(Math.random() * (max - min)) + min;
+            var d = c.toString();
+            exit = exit + d;
+            count++;
+        }
+        return Number(exit);
+    }
+
+    function innerInDiv (content){
+        document.getElementById('zadacha').innerHTML = content;
+    }
+
+    function getRandomAlg(){
+        var dict = "+-"; //строка содержит все доступные символы
+        var min = 0;
+        var max = dict.length;
+        var c = Math.floor(Math.random() * (max - min)) + min;
+        var b = dict[c]; //в переменную с записывается случайный из них
+        return b;
+    }
+    var randAlg = getRandomAlg();
+    var firstNumber = getRandomNumber(2);
+    var secondNumber = getRandomNumber(2);
+    innerInDiv (firstNumber + " " + randAlg + " " + secondNumber + " = " + eval(firstNumber + randAlg + secondNumber)); // запишем пример при первом запуске страницы
+</script>
+</body>
+</html>
