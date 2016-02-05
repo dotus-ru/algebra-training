@@ -2,19 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Тренировка алгебры</title>
     <link rel="stylesheet" href="css.css">
 </head>
 <body>
 <div id="container">
-<div id="zadacha" style="font-size: 36px"></div>
-<button onclick="innerInDiv()">Следующий пример</button>
+    <div id="zadacha"></div>
+    <div onclick="innerInDiv()" class="button">
+        <span>Следующий пример</span>
+    </div>
 </div>
 <script>
     var randAlg; // случайное арифметическое действие, плюс или минус
     var firstNumber; // случайное первое число
     var secondNumber; // случайное второе число
     var otvet; // ответ на решение задачи
+    var startTime = '';
+
+    // получим количество секунд, прошедших с 1970 года
+    function time(){
+        return parseInt(new Date().getTime()/1000)
+    }
 
     // Возвращает случайное число между min (включительно) и max (не включая max)
     function getRandomNumber(how) {
@@ -33,7 +42,11 @@
 
     // Функция записи в див сначала ответа на предыд. пример а потом вывод нового примера
     function innerInDiv (content){
-        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet;
+        var otvetTime = '';
+        if(startTime != ''){otvetTime = time() - startTime;} // если это не первый запуск (старттайм не равна пустоте) вычислим время решения последнего примера
+        if(otvetTime > 100){otvetTime = 100;} // если время решения последнего примера больше 100 то скорее всего мы просто не выключили задачник
+
+        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet + " - " + otvetTime;
 
         randAlg = getRandomAlg();
         firstNumber = getRandomNumber(2);
@@ -42,6 +55,7 @@
         content = firstNumber + " " + randAlg + " " + secondNumber;
 
         setTimeout(function() { document.getElementById('zadacha').innerHTML = content; }, 1000); // через секунду выводим новый пример
+        startTime = time();
     }
 
     // Функция генерации случайного алгебраиченского символа из списка, + или -
