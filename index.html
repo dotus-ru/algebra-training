@@ -13,6 +13,7 @@
         <span>Следующий пример</span>
     </div>
 </div>
+
 <script>
     var randAlg; // случайное арифметическое действие, плюс или минус
     var firstNumber; // случайное первое число
@@ -42,11 +43,11 @@
 
     // Функция записи в див сначала ответа на предыд. пример а потом вывод нового примера
     function innerInDiv (content){
-        var otvetTime = '';
-        if(startTime != ''){otvetTime = time() - startTime;} // если это не первый запуск (старттайм не равна пустоте) вычислим время решения последнего примера
-        if(otvetTime > 100){otvetTime = 100;} // если время решения последнего примера больше 100 то скорее всего мы просто не выключили задачник
+        var responseTime = '';
+        if(startTime != ''){responseTime = time() - startTime;} // если это не первый запуск (старттайм не равна пустоте) вычислим время решения последнего примера
+        if(responseTime > 100){responseTime = 100;} // если время решения последнего примера больше 100 то скорее всего мы просто не выключили задачник
 
-        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet + " - " + otvetTime;
+        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet + " - " + responseTime + "s";
 
         randAlg = getRandomAlg();
         firstNumber = getRandomNumber(2);
