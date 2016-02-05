@@ -31,6 +31,7 @@
         return Number(exit);
     }
 
+    // Функция записи в див сначала ответа на предыд. пример а потом вывод нового примера
     function innerInDiv (content){
         if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet;
 
@@ -40,9 +41,10 @@
         otvet = eval(firstNumber + randAlg + secondNumber);
         content = firstNumber + " " + randAlg + " " + secondNumber;
 
-        setTimeout(function() { document.getElementById('zadacha').innerHTML = content; }, 1000);
+        setTimeout(function() { document.getElementById('zadacha').innerHTML = content; }, 1000); // через секунду выводим новый пример
     }
 
+    // Функция генерации случайного алгебраиченского символа из списка, + или -
     function getRandomAlg(){
         var dict = "+-"; //строка содержит все доступные символы
         var min = 0;
@@ -55,7 +57,7 @@
    // randAlg = getRandomAlg();
    //firstNumber = getRandomNumber(2);
     //secondNumber = getRandomNumber(2);
-    //innerInDiv (); // запишем пример при первом запуске страницы
+    innerInDiv (); // запишем пример при первом запуске страницы
 </script>
 </body>
 </html>
