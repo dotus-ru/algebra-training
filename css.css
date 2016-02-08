@@ -11,6 +11,12 @@ body {
     text-align: center;
 }
 
+.cheked {
+    padding: 10px;
+    background-color: green;
+    color: white;
+}
+
 #zadacha {
     font-size: 34px;
     height: 40px;
