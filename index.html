@@ -33,8 +33,8 @@
     // Возвращает случайное число между min (включительно) и max (не включая max)
     function getRandomNumber(how, min, max) {
         max++; // это для того что в генераторе не учитывается число мах, последнее
-        var count = 1;
-        var exit = "";
+        var count = 1; // назначим старт для счётчика
+        var exit = ""; // переменная, в которую будет набиваться выход
         while(count <= how){
             var c = Math.floor(Math.random() * (max - min)) + min;
             var d = c.toString(); // превратим в строку чтобы цифры они слеплялись, а не плюсовались
@@ -50,8 +50,8 @@
         if(startTime != ''){responseTime = time() - startTime;} // если это не первый запуск (старттайм не равна пустоте) вычислим время решения последнего примера
         if(responseTime > 100){responseTime = 100;} // если время решения последнего примера больше 100 то скорее всего мы просто не выключили задачник
 
-        //if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet + " - " + responseTime + "s";
-        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet;
+        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet + "&nbsp; &nbsp; <span>" + responseTime + "s</span>";
+        //if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet;
 
         randAlg = getRandomAlg();
         firstNumber = getRandomNumber(2,1,9);
