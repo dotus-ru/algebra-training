@@ -8,6 +8,10 @@
 </head>
 <body>
 <div id="container">
+    <div class="cheked">
+        <input type="checkbox" id="chek-plus"> + &nbsp; &nbsp; &nbsp;
+        <input type="checkbox" id="chek-minus" checked> -
+    </div>
     <div id="zadacha"></div>
     <div onclick="innerInDiv()" class="button">
         <span>Следующий пример</span>
@@ -27,18 +31,17 @@
     }
 
     // Возвращает случайное число между min (включительно) и max (не включая max)
-    function getRandomNumber(how) {
-        var min = 1;
-        var max = 10;
+    function getRandomNumber(how, min, max) {
+        max++; // это для того что в генераторе не учитывается число мах, последнее
         var count = 1;
         var exit = "";
         while(count <= how){
             var c = Math.floor(Math.random() * (max - min)) + min;
-            var d = c.toString();
+            var d = c.toString(); // превратим в строку чтобы цифры они слеплялись, а не плюсовались
             exit = exit + d;
             count++;
         }
-        return Number(exit);
+        return Number(exit); // вернём прелобразованную в цифры строку из цифр
     }
 
     // Функция записи в див сначала ответа на предыд. пример а потом вывод нового примера
@@ -47,11 +50,12 @@
         if(startTime != ''){responseTime = time() - startTime;} // если это не первый запуск (старттайм не равна пустоте) вычислим время решения последнего примера
         if(responseTime > 100){responseTime = 100;} // если время решения последнего примера больше 100 то скорее всего мы просто не выключили задачник
 
-        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet + " - " + responseTime + "s";
+        //if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet + " - " + responseTime + "s";
+        if(otvet != undefined) document.getElementById('zadacha').innerHTML = otvet;
 
         randAlg = getRandomAlg();
-        firstNumber = getRandomNumber(2);
-        secondNumber = getRandomNumber(2);
+        firstNumber = getRandomNumber(2,1,9);
+        secondNumber = getRandomNumber(2,1,9);
         otvet = eval(firstNumber + randAlg + secondNumber);
         content = firstNumber + " " + randAlg + " " + secondNumber;
 
@@ -61,15 +65,17 @@
 
     // Функция генерации случайного алгебраиченского символа из списка, + или -
     function getRandomAlg(){
-        var dict = "+-"; //строка содержит все доступные символы
-        var min = 0;
-        var max = dict.length;
-        var c = Math.floor(Math.random() * (max - min)) + min;
-        var b = dict[c]; //в переменную с записывается случайный из них
+        var symbols = [];
+        if (document.getElementById('chek-plus').checked == true){symbols.push('+');}
+        if (document.getElementById('chek-minus').checked == true){symbols.push('-');}
+        var c = getRandomNumber(1,0,symbols.length-1); // получим случайное число в зависимости от величины массива с символами + -
+        var b = symbols[c]; //в переменную с записывается случайный из них
         return b;
     }
 
-   // randAlg = getRandomAlg();
+
+
+    // randAlg = getRandomAlg();
    //firstNumber = getRandomNumber(2);
     //secondNumber = getRandomNumber(2);
     innerInDiv (); // запишем пример при первом запуске страницы
