@@ -39,10 +39,3 @@ body {
 .button span {
     border-bottom: 1px dashed #fff; /* Добавляем свою линию */
 }
-
-.ostalos {
-    padding: 10px;
-    font-size: 14px;
-    background-color: gray;
-    color: white;
-}
