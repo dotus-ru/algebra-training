@@ -16,6 +16,9 @@
     <div onclick="innerInDiv()" class="button">
         <span>Следующий пример</span>
     </div>
+    <div class="ostalos">
+        Осталось: <b id="ostatok">100</b>
+    </div>
 </div>
 
 <script>
@@ -24,6 +27,7 @@
     var secondNumber; // случайное второе число
     var otvet; // ответ на решение задачи
     var startTime = '';
+    var ostatok = 100; // начальный счёт количества ежедневных тренировок
 
     // получим количество секунд, прошедших с 1970 года
     function time(){
@@ -44,6 +48,11 @@
         return Number(exit); // вернём прелобразованную в цифры строку из цифр
     }
 
+    function countRaz(){
+        document.getElementById('ostatok').innerHTML = ostatok;
+        ostatok = ostatok-1;
+    }
+
     // Функция записи в див сначала ответа на предыд. пример а потом вывод нового примера
     function innerInDiv (content){
         var responseTime = '';
@@ -59,7 +68,7 @@
         otvet = eval(firstNumber + randAlg + secondNumber);
         content = firstNumber + " " + randAlg + " " + secondNumber;
 
-        setTimeout(function() { document.getElementById('zadacha').innerHTML = content; }, 1000); // через секунду выводим новый пример
+        setTimeout(function() { document.getElementById('zadacha').innerHTML = content; countRaz()}, 1000); // через секунду выводим новый пример
         startTime = time();
     }
 
